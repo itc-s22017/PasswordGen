@@ -10,9 +10,9 @@
 
     const a_z = String.fromCharCode(...Array.from({length: 26}, (_,i) => 'a'.charCodeAt(0) + i))
     const one_nine = [...Array(10)].map((_,i)=>i).join('')
-    const both = a_z.concat(one_nine)
+    const both = [...a_z,...one_nine]
     const sym = '-_/*+.,!#$|%^'
-    const sym2 = both.concat(sym)
+    const sym2 = [...both,...sym]
 
     const flag = (v,name) =>{
         const text = [...Array(v)].map(()=>name[Math.floor(Math.random() * name.length)]).join('')
@@ -29,7 +29,7 @@
         if (num.checked && symbol.checked){
             result = flag(v,sym2)
         }else if(!num.checked && symbol.checked){
-            result = flag(v,a_z.concat(sym))
+            result = flag(v,[...a_z,...sym])
         }else if(num.checked && !symbol.checked){
             result = flag(v,both)
         }else{
